@@ -1,0 +1,89 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <h2 class="pageTitle">Trello Board</h2>
+            <hr />
+            <div class="addList">
+                <button class="btn btn-primary" data-target="#emailModal" data-toggle="modal">
+                    Add List
+                </button>
+            </div>
+            <div class="row" cdkDropListGroup>
+                <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="value.values"
+                    class="col-md-3 boxes" *ngFor="let value of appcompModal.teamsArray">
+                    <div class="card card-chart">
+                        <div class="card-header card-header-icon card-header-danger">
+                            <h4>{{ value.listName }}</h4>
+                            <button (click)="removeList(value.listName)">Remove</button>
+                        </div>
+                    </div>
+                    <div class="example-box" *ngFor="let item of value.values" cdkDrag>
+                        {{ item.cardName }}
+                        <button (click)="removeCard(value.listName, item.cardName)">Remove</button>
+                    </div>
+                    <button class="btn btn-primary" data-target="#cardModal" data-toggle="modal" (click)="setSelectedList(value.listName)">
+                        Add Card
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="orderStatusLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderStatusLabel">Add a Team</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label>Name : </label>
+                    <input type="text" name="name" [(ngModel)]="appcompModal.listName"
+                        placeholder="Enter the list Name" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addList()">
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cardModal" tabindex="-1" role="dialog" aria-labelledby="orderStatusLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderStatusLabel">Add a Card</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label>Name : </label>
+                    <input type="text" name="name" [(ngModel)]="appcompModal.cardName"
+                        placeholder="Enter the Card Name" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addCard()">
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
