@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
-                        event.currentIndex);
+                        0);
     }
     this.modifyLocalStorage();
   }
